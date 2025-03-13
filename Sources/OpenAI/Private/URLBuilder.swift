@@ -67,6 +67,9 @@ struct RunsURLBuilder: URLBuilder {
         if let before {
             components.queryItems = [URLQueryItem(name: "before", value: before)]
         }
+        if let apiVersion = configuration.apiVersion, !apiVersion.isEmpty {
+            components.queryItems = components.queryItems ?? [] + [URLQueryItem(name: "api-version", value: apiVersion)]
+        }
         return components.urlSafe
     }
 }

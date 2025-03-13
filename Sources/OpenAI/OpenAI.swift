@@ -32,6 +32,9 @@ final public class OpenAI {
 
         public let port: Int
         public let scheme: String
+
+        /// Optional api version added to requests as api-version parameter in query
+        public let apiVersion: String?
         
         /// Default request timeout
         public let timeoutInterval: TimeInterval
@@ -45,13 +48,14 @@ final public class OpenAI {
         /// Currently SDK sets such fields: Authorization, Content-Type, OpenAI-Organization.
         public let customHeaders: [String: String]
         
-        public init(token: String?, organizationIdentifier: String? = nil, host: String = "api.openai.com", port: Int = 443, scheme: String = "https", basePath: String = "/v1", timeoutInterval: TimeInterval = 60.0, customHeaders: [String: String] = [:]) {
+        public init(token: String?, organizationIdentifier: String? = nil, host: String = "api.openai.com", port: Int = 443, scheme: String = "https", basePath: String = "/v1", apiVersion: String? = nil, timeoutInterval: TimeInterval = 60.0, customHeaders: [String: String] = [:]) {
             self.token = token
             self.organizationIdentifier = organizationIdentifier
             self.host = host
             self.port = port
             self.scheme = scheme
             self.basePath = basePath
+            self.apiVersion = apiVersion
             self.timeoutInterval = timeoutInterval
             self.customHeaders = customHeaders
         }
