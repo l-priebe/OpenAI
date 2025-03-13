@@ -31,6 +31,10 @@ struct DefaultURLBuilder: URLBuilder {
         if let after {
             components.queryItems = [URLQueryItem(name: "after", value: after)]
         }
+
+        if let apiVersion = configuration.apiVersion, !apiVersion.isEmpty {
+            components.queryItems = components.queryItems ?? [] + [URLQueryItem(name: "api-version", value: apiVersion)]
+        }
         
         return components.urlSafe
     }
@@ -66,9 +70,6 @@ struct RunsURLBuilder: URLBuilder {
         components.path = components.path.replacingOccurrences(of: "THREAD_ID", with: threadId)
         if let before {
             components.queryItems = [URLQueryItem(name: "before", value: before)]
-        }
-        if let apiVersion = configuration.apiVersion, !apiVersion.isEmpty {
-            components.queryItems = components.queryItems ?? [] + [URLQueryItem(name: "api-version", value: apiVersion)]
         }
         return components.urlSafe
     }
